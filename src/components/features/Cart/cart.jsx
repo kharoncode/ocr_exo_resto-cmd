@@ -1,37 +1,22 @@
-import { useEffect, useState } from 'react';
-import { useStore } from 'react-redux';
-import { SuperCremeux } from '@common/models';
+import { useSelector } from 'react-redux';
+import { getProductList } from '@app/selectors';
+import { getListQuantityProductPerName } from '../../../app/selectors';
 
 function Cart() {
-   const store = useStore();
-
-   const [list, setList] = useState(store.getState().list);
-   useEffect(() => {
-      store.subscribe(() => {
-         setList(store.getState().list);
-      });
-   });
+   const list = useSelector(getListQuantityProductPerName);
    return (
-      <div className="container">
-         <div className="catNavBar">
-            <button
-               onClick={() =>
-                  store.dispatch({ type: 'ADD_PRODUCT', payload: SuperCremeux })
-               }
-            >
-               Ajouter un super crémeux
-            </button>
-         </div>
-         <div className="Selection">
-            <h1>Liste de produits sélectionnés:</h1>
-            <ul>
-               {list.map((el, index) => (
-                  <li key={index} className="selectedProduct">
-                     {el.title} : {el.price}€
-                  </li>
-               ))}
-            </ul>
-         </div>
+      <div className="Selection">
+         <h1>Vos produits sélectionnés</h1>
+         {list
+            .filter((product) => product.quantity !== 0)
+            .map((el, index) => {
+               return (
+                  <span key={index} className="SelectedProduct">
+                     {el.quantity} x {el.title}
+                  </span>
+               );
+            })}
+         <ul></ul>
       </div>
    );
 }

@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { PouletCroquant, SuperCremeux } from '../common/models';
 
 let state = {
    value: null,
-   list: [SuperCremeux, PouletCroquant],
+   list: [],
+   owner: null,
 };
 
 const reducer = (currentState, action) => {
@@ -20,7 +20,7 @@ const reducer = (currentState, action) => {
       }
       case 'APPLY_VOUCHER': {
          const withVoucherList = currentState.list.map((item) =>
-            item.title === 'Super Crémeux'
+            item.title === action.payload.title
                ? { ...item, price: action.payload.price }
                : item
          );

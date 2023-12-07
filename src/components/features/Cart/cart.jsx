@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { getProductList } from '@app/selectors';
 import { getListQuantityProductPerName } from '../../../app/selectors';
 
 function Cart() {

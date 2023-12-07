@@ -1,6 +1,6 @@
 import { useSelector, useStore } from 'react-redux';
 import { isVoucherAvailable } from '../../../app/selectors';
-import { applyVoucher } from '../../../app/store';
+import { cartSlice } from '../Cart/cartSlice';
 
 function Voucher({ name }) {
    const store = useStore();
@@ -9,7 +9,11 @@ function Voucher({ name }) {
    return (
       <div className="Voucher">
          {available && (
-            <button onClick={() => store.dispatch(applyVoucher(name))}>
+            <button
+               onClick={() =>
+                  store.dispatch(cartSlice.actions.applyVoucher(name))
+               }
+            >
                Appliquer ma promo {name} à 2 euros
             </button>
          )}

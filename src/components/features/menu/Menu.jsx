@@ -1,7 +1,7 @@
 import * as ProductList from '@common/models';
 import { ProductCard } from '../../productCard/ProductCard';
 import { useDispatch } from 'react-redux';
-import { addProduct } from '../../../app/store';
+import { cartSlice } from '../Cart/cartSlice';
 
 function Menu() {
    const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function Menu() {
             <ProductCard
                key={product.title}
                product={product}
-               onSelect={() => dispatch(addProduct(product))}
+               onSelect={() => dispatch(cartSlice.actions.addProduct(product))}
             />
          ))}
       </div>

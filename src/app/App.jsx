@@ -5,6 +5,7 @@ import Total from '@components/features/Total/total';
 import Owner from '@components/features/owner/Owner';
 import Menu from '@components/features/menu/Menu';
 import * as ProductList from '@common/models';
+import Notes from '../components/features/note/Notes';
 
 function App() {
    return (
@@ -16,6 +17,7 @@ function App() {
             <Voucher key={el.title} name={el.title} />
          ))}
          <Owner />
+         <Notes />
       </div>
    );
 }

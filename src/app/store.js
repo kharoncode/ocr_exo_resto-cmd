@@ -6,22 +6,11 @@ import {
 import { cartSlice } from '../components/features/Cart/cartSlice';
 import { ownerSlice } from '../components/features/owner/ownerSlice';
 import { notesSlice } from '../components/features/note/noteSlice';
+import { thunk } from 'redux-thunk';
 
 let state = {
    owner: {},
    list: [],
-};
-
-const middleware = [
-   (store) => (next) => (action) => {
-      console.log('Action', action);
-      next(action);
-   },
-];
-
-const myLogger = (store) => (next) => (action) => {
-   console.log('Logged Action', action);
-   next(action);
 };
 
 export const store = configureStore({
@@ -31,6 +20,12 @@ export const store = configureStore({
       list: cartSlice.reducer,
       notes: notesSlice.reducer,
    }),
-   //middleware: (getDefaultMiddleware) => getDefaultMiddleware({}),
-   middleware: [applyMiddleware(myLogger)],
+   middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().prepend([
+         (store) => (next) => (action) => {
+            console.log('Action', action);
+            next(action);
+         },
+         thunk,
+      ]),
 });

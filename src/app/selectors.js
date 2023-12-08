@@ -13,13 +13,13 @@ export const isVoucherAvailable = (name) => (state) => {
    return getProductList(state)?.find((product) => product.title === name);
 };
 
-export const getQuantityProductPerNam = (name) => (state) => {
+export const getQuantityProductPerName = (name) => (state) => {
    return getProductList(state).filter((product) => product.title === name)
       .length;
 };
 export const getListQuantityProductPerName = (state) => {
    return Object.values(ProductList).map((product) => ({
       title: product.title,
-      quantity: getQuantityProductPerNam(product.title)(state),
+      quantity: getQuantityProductPerName(product.title)(state),
    }));
 };
